@@ -1,0 +1,38 @@
+# Images
+*.png
+input/*
+!input/floor_plan_unity.png
+output/*
+!output/.gitkeep
+save/
+
+# Cmake
+CMakeFiles
+.vscode
+cmake_install.cmake
+CMakeCache.txt
+Makefile
+build
+.idea/
+
+# Miscalaneous
+*.so
+.editorconfig
+.cache
+
+# Ninja
+.ninja_deps
+.ninja_log
+build.ninja
+
+# Clion
+Testing/
+.cmake/
+libhexagonal_util.a
+
+# Other
+hexagonal
+.clang-format
+json/database.json
+__pycache__
+memgraph-platform

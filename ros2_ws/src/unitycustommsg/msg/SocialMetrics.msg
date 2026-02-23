@@ -1,0 +1,6 @@
+float64 min_distance_from_static
+float64 min_distance_from_dynamic
+float64 cumulative_social_force
+float64 cumulative_static_force
+float64 cumulative_dynamic_force
+float64 social_work

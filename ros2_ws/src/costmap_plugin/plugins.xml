@@ -1,0 +1,5 @@
+<library path="libdynamic_human_layer">
+  <class name="unitycustom_layers::DynamicHumanLayer"
+         type="unitycustom_layers::DynamicHumanLayer"
+         base_class_type="nav2_costmap_2d::Layer"/>
+</library>

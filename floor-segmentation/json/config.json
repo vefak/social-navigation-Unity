@@ -1,0 +1,232 @@
+{
+    "fileNames": {
+        "inputMapName": "floor_plan_unity.png",
+        "outputMapName": "hex_grid.png",
+        "outputTrajName": "trajectory.txt"
+    },
+    "gridCompute": {
+        "tileSize": 4,
+        "detectionThreshold": 0.9,
+        "displayRuntime": true,
+        "wallMap": {
+            "jumpPenalty": 0.01,
+            "limitWallSize": true,
+            "maxWallSize": 100
+        }
+    },
+    "robot": {
+        "length": 0.625,
+        "width": 0.48135,
+        "start": {
+            "position": {
+                "x": -30.0,
+                "y": -0.5
+            },
+            "theta": 1.5708
+        },
+        "mass": 70,
+        "maxVelocity": 4,
+        "cruiseVelocity": 1,
+        "steeringAngle": 1.135,
+        "wheelbase": 2.0,
+        "approximateNearestObstacle": true,
+        "circles": [
+            {
+                "x": 0,
+                "y": 0,
+                "radius": 0.27
+            },
+            {
+                "x": -0.37,
+                "y": 0,
+                "radius": 0.27
+            },
+            {
+                "x": 0.37,
+                "y": 0,
+                "radius": 0.27
+            }
+        ]
+    },
+    "human": {
+        "collisionRadius": 0.5,
+        "contractionCutoff": 0.2
+    },
+    "pathPlanning": {
+        "algorithm": "Oriented-A-Star",
+        "goal": {
+            "position": {
+                "x": 3.0,
+                "y": 3.0
+            },
+            "destination_threshold": 10.0,
+            "_theta": 0.0,
+            "theta": 1.5708
+        },
+        "nearestHexSanityCheck": true,
+        "heuristicParams": {
+            "heuristic": "euclidean",
+            "avoidWalls": true,
+            "useValleyPotential": true,
+            "infinity": 1e20,
+            "angleWeight": 1.0
+        },
+        "plotSearchTree": false,
+        "OrientedAStarParams": {
+            "angleCostMultiplier": 1.0,
+            "angleSensitivity": 10.0,
+            "angleDeadzone": 0.2,
+            "turnratePenalty": 1e4,
+            "angleCostFunction": "exponential"
+        }
+    },
+    "localPlanner": {
+        "planner": "Oriented-A-Star",
+        "_planner": "SFM",
+        "socialForce": {
+            "linearParams": {
+                "maxSamples": 100000,
+                "lookahead": 5,
+                "samplingPeriod": 0.05,
+                "goalCutoffDistance": 0.05
+            },
+            "influenceAuxiliaryAgents": false,
+            "freeWalkParams": {
+                "walkLength": 50,
+                "skipSteps": 2,
+                "projectStartingPoint": false
+            },
+            "rotationParams": {
+                "alpha": 3,
+                "k_d": 50,
+                "k_o": 1,
+                "k_lambda": 8
+            }
+        },
+        "gridParams": {
+            "halfHeight": 21,
+            "halfWidth": 21,
+            "adaptive": true,
+            "gridDownscaleFactor": 0.05,
+            "centerSlide": 0.5
+        },
+        "heuristicParams": {
+            "heuristic": "euclidean",
+            "avoidWalls": false,
+            "infinity": 1e20,
+            "angleWeight": 0.0
+        },
+        "AStarParams": {
+            "lightweight": false,
+            "downscaleField": 10000,
+            "lookahead": 10,
+            "fixedWalkLength": true,
+            "rimTermination": false,
+            "stoppageDistance": 0.5,
+            "pathSmoothing": {
+                "algorithm": "None",
+                "halfWindow": 7,
+                "sigma": 1.0
+            }
+        },
+        "OrientedAStarParams": {
+            "angleCostMultiplier": 10.0,
+            "angleSensitivity": 5.0,
+            "angleDeadzone": 0.2,
+            "angleCostFunction": "exponential"
+        }
+    },
+    "potentialField": {
+        "precomputePotential": true,
+        "mapPotential": {
+            "type": "VoronoiFieldPotential",
+            "voronoiFieldPotentialParams": {
+                "scale": 5000.0,
+                "alpha": 10.0,
+                "distObsMax": 3.0
+            }
+        },
+        "drivingPotential": {
+            "type": "LookaheadPotential",
+            "distFunction": "Conic",
+            "waypointAttraction": 100,
+            "goalAndPathPotentialParams": {
+                "valleyAttraction": 0.75
+            },
+            "lookaheadPotentialParams": {
+                "windowSize": 10,
+                "lookahead": 5
+            },
+            "windowPotentialParams": {
+                "windowSize": 5,
+                "cutoffDist": 0.05
+            }
+        },
+        "dynamicPotential": {
+            "type": "EggshellPotential",
+            "cutoff": 0.2
+        },
+        "obstacleRepulsionParams": {
+            "A": 2500,
+            "B": 1
+        }
+    },
+    "rescaling": {
+        "inMeters": true,
+        "xMin": -36,
+        "xMax": 12,
+        "yMin": -13.5,
+        "yMax": 13.5
+    },
+    "plot": {
+        "defaultRGB": {
+            "R": 0.7,
+            "G": 0.7,
+            "B": 0.7
+        },
+        "upscale": 4,
+        "potentialFieldSnapshots": {
+            "save": true,
+            "name": "potential",
+            "extension": "png",
+            "stride": 0.5,
+            "logPlot": false,
+            "flipColorScheme": true
+        }
+    },
+    "json": {
+        "_databasePath": "neo4j_map",
+        "databasePath_": "../json",
+        "databasePath": "",
+        "spacing": -1,
+        "save": false
+    },
+    "neo4j": {
+        "uri": "bolt://localhost:7687",
+        "_user": "",
+        "_password": "",
+        "user": "neo4j",
+        "password": "12345678",
+        "queryParams": {
+            "distanceThreshold": 30
+        }
+    },
+    "stanleyControllerParams":{
+        "dred": 0.5,
+        "velk": 1.2,
+        "k": 5.0,
+        "ksoft": 0.1,
+        "maxDelta": 1.221730476,
+        "maxDeltaVel": 1.745329252,
+        "minSpeed": 0.05,
+        "vx": 1.66,
+        "wheelsize": 1.0,
+        "xc":{
+            "x":0.0,
+            "y":0.0
+        },
+        "sampling_rate_m": 0.1,   
+        "goal_distance_threshold": 0.45
+    }
+    
+}
